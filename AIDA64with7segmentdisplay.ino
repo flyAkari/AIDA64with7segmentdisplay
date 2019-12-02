@@ -165,10 +165,12 @@ void ledConnectionTest()
 
 void loop() {
   // put your main code here, to run repeatedly:
+  //注意：本段代码要求AIDA64设置必须和视频中完全相同才能解析 1.第一个标签以C开头，其后不能再出现字母C  2.标签只能为3个字母  3.取消勾选所有的单位显示
+  //没办法，AIDA64发数据的格式我们也改不了...你们有没有更好的办法取代我这个沙雕方法...
   if(Serial.available()>0)
   {
       inByte = Serial.read();
-      if(inByte==0x43)
+      if(inByte==0x43)  //判断是不是字母C，找到数据帧起点
       { 
         frame[0] = inByte;
         int count = 1;
