@@ -42,8 +42,9 @@ void setup() {
   for(int address=0;address<devices;address++) {
     /*The MAX72XX is in power-saving mode on startup*/
     lc.shutdown(address,false);
-    /* Set the brightness to a medium values */
-    lc.setIntensity(address,6);
+    /* 数码管亮度调至最低，防止功率过高开发板过热，亮度过高会有安全隐患 */
+    /* 注意：实测亮度调至15，数码管全亮时，滤波电容温度会高于100度 */
+    lc.setIntensity(address,1);
     /* and clear the display */
     lc.clearDisplay(address);
   }
