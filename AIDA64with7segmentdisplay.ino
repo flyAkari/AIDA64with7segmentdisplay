@@ -1,12 +1,12 @@
 //使用Arduino UNO的连线方式
-#define DIN 11
-#define CS  10
-#define CLK 13
+//#define DIN 11
+//#define CS  10
+//#define CLK 13
 
 //使用ESP8266的连线方式
-//#define DIN 13 //D7
-//#define CS  15 //D8
-//#define CLK 14 //D5
+#define DIN 13 //D7
+#define CS  15 //D8
+#define CLK 14 //D5
 
 #define uchar unsigned char
 #include "LedControl.h"
@@ -78,14 +78,16 @@ void refreshled()
   lc.setRow(0,7,B01001110);
   lc.setRow(0,6,B01100111);
   lc.setRow(0,5,B00111110);*/
-  setRevNum(0,6,a0);
-  setRevNum(0,5,a1);
-  setRevNum(0,4,a2);
+   
   lc.setRow(0,0,C_rev);
   lc.setRow(0,1,P_rev);
   lc.setRow(0,2,U_rev);
+  lc.setChar(0,3,' ',false);
+  setRevNum(0,4,a2);
+  setRevNum(0,5,a1);
+  setRevNum(0,6,a0);
   lc.setRow(0,7,Cel_rev);
-
+  
   b3 = num2/1000+48;
   b2 = (num2%1000)/100+48;
   b1 = ((num2%1000)%100)/10+48;
@@ -99,15 +101,16 @@ void refreshled()
   lc.setChar(1,3,b3,false);
   lc.setRow(1,7,B01011011);
   lc.setRow(1,6,B01011011);
-  lc.setRow(1,5,B01111110);*/
-  setRevNum(1,6,b0);
-  setRevNum(1,5,b1);
+  lc.setRow(1,5,B01111110);*/  
+  lc.setRow(1,0,G_rev);
+  lc.setRow(1,1,P_rev);
+  lc.setRow(1,2,U_rev);
+  lc.setChar(1,3,' ',false);
   setRevNum(1,4,b2);
-  lc.setRow(1,0,S_rev);
-  lc.setRow(1,1,S_rev);
-  lc.setRow(1,2,D_rev);
+  setRevNum(1,5,b1);
+  setRevNum(1,6,b0);
   lc.setRow(1,7,Cel_rev);
-  
+   
   c3 = num3/1000+48;
   c2 = (num3%1000)/100+48;
   c1 = ((num3%1000)%100)/10+48;
@@ -121,15 +124,16 @@ void refreshled()
   lc.setChar(2,3,c3,false);
   lc.setRow(2,7,B01011111);
   lc.setRow(2,6,B01100111);
-  lc.setRow(2,5,B00111110);*/
-  setRevNum(2,6,c0);
-  setRevNum(2,5,c1);
+  lc.setRow(2,5,B00111110);*/    
+  lc.setRow(2,0,S_rev);
+  lc.setRow(2,1,S_rev);
+  lc.setRow(2,2,D_rev);
+  lc.setChar(2,3,' ',false);
   setRevNum(2,4,c2);
-  lc.setRow(2,0,G_rev);
-  lc.setRow(2,1,P_rev);
-  lc.setRow(2,2,U_rev);
+  setRevNum(2,5,c1);
+  setRevNum(2,6,c0);
   lc.setRow(2,7,Cel_rev);
-
+  
   d3 = num4/1000+48;
   d2 = (num4%1000)/100+48;
   d1 = ((num4%1000)%100)/10+48;
@@ -137,20 +141,22 @@ void refreshled()
   if(num4<1000) d3=' ';
   if(num4<100)  d2=' ';
   if(num4<10)   d1=' ';
+  /*
   lc.setChar(3,0,d0,false);
   lc.setChar(3,1,d1,false);
   lc.setChar(3,2,d2,false);
   lc.setChar(3,3,d3,false);
   lc.setRow(3,7,B01000111);
   lc.setRow(3,6,B01110111);
-  lc.setRow(3,5,B01110110);
-/*  setRevNum(3,7,d0);
-  setRevNum(3,6,d1);
-  setRevNum(3,5,d2);
-  setRevNum(3,4,d3);
+  lc.setRow(3,5,B01110110);*/
   lc.setRow(3,0,F_rev);
   lc.setRow(3,1,A_rev);
-  lc.setRow(3,2,N_rev);*/
+  lc.setRow(3,2,N_rev);
+  lc.setChar(3,3,' ',false);
+  setRevNum(3,4,d3);
+  setRevNum(3,5,d2);
+  setRevNum(3,6,d1);
+  setRevNum(3,7,d0);
 }
 
 void ledConnectionTest()
